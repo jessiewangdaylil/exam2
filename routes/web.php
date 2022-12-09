@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Cgy;
+use App\Models\Article;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiteController;
 
@@ -102,5 +103,13 @@ Route::get('/newcgy',function(){
     $cgy->save();
 });
 
+Route::get('/distinct',function(){
+    $data = Article::select(['id','subject','cgy_id'])->distinct('cgy_id')->get();
+    return $data;
+});
 
-
+Route::get('/pluck',function(){
+    //$data = Cgy::select(['id','subject'])->get();
+    $data = Cgy::pluck('subject','id');
+    return $data;
+});

@@ -14,7 +14,7 @@ class CgyController extends Controller
      */
     public function index()
     {
-        $cgies = Cgy::where('id','>',101)->get();
+        $cgies = Cgy::where('id','>',50)->where('id','<=',80)->orderBy('id','desc')->get();
         return $cgies;
     }
 
