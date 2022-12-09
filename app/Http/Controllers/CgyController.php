@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Cgy;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,9 @@ class CgyController extends Controller
      */
     public function index()
     {
-        $cgies = Cgy::where('id','>',50)->where('id','<=',80)->orderBy('id','desc')->get();
+        //$cgies = Cgy::where('id','>',50)->where('id','<=',80)->orderBy('id','desc')->get();
+        $date = Carbon::createFromFormat('Y-m-d h:i:s','2020-12-8 00:00:00');
+        $cgies = Cgy::where('enabled_at','>',$date)->get();
         return $cgies;
     }
 
