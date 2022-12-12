@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Cgy;
+use App\Models\Article;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiteController;
 
@@ -16,6 +18,20 @@ use App\Http\Controllers\SiteController;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/relation',function(){
+    $article = Article::find(1);
+    dd($article->cgy->subject);
+});
+
+Route::get('/changerelation',function(){
+    $article = Article::find(1);
+    $article->cgy_id = 5;
+    // $cgy_4 = Cgy::find(4);
+    // $article->cgy()->associate($cgy_4);
+    $article->save();
+    dd($article);
 });
 
 
