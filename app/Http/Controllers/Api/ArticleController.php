@@ -121,4 +121,57 @@ class ArticleController extends Controller
         $num = Article::where('enabled',true)->count();
         return $num;
     }
+
+    //取得指定分類的所有文章
+    public function queryCgyRelation(Cgy $cgy)
+    {
+
+    }
+
+    //取得原分類ID為$old_cgy_id的第一個文章，將之改為新分類ID $new_cgy_id
+    public function changeCgy($old_cgy_id,$new_cgy_id)
+    {
+
+    }
+
+    //取得指定文章的所屬分類
+    public function getArticleCgy(Article $article)
+    {
+
+    }
+
+    //取得原分類 id 為$old_cgy_id的所有文章，將之改為新分類ID $new_cgy_id
+    public function changeAllCgy($old_cgy_id,$new_cgy_id){
+
+    }
+
+    //取得指定文章的所有標籤，連同該標籤建立的時間
+    public function queryTags(Article $article){
+
+    }
+
+    //為指定的文章加入 id 為 tag_id 的標籤
+    public function addTag(Article $article , $tag_id){
+
+    }
+
+    //為指定的文章移除 id 為 tag_id 的標籤
+    public function removeTag(Article $article , $tag_id){
+
+    }
+
+    //將指定文章的標籤重新設定為 1 , 3 , 5 
+    public function syncTag(Article $article){
+
+    }
+
+    //為指定的文章加入 id 為 tag_id 的標籤，並設定標籤顏色
+    public function addTagWithColor(Article $article , $tag_id, $color){
+
+    }
+
+    //取得指定文章的所有標籤，連同該標籤建立的時間以及標籤顏色
+    public function queryTagsWithColor(Article $article){
+
+    }
 }
