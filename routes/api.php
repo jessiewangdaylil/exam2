@@ -43,3 +43,8 @@ Route::namespace('App\Http\Controllers\Api')->prefix('articles/query')->group(fu
     Route::get('queryTagsWithColor/{article}','ArticleController@queryTagsWithColor');
 });
 
+Route::group(['prefix' => 'auth', 'namespace' => 'App\Http\Controllers\Api'], function () {
+    Route::get('/', 'AuthController@me')->name('me');
+    Route::post('login', 'AuthController@login')->name('login');
+    Route::post('logout', 'AuthController@logout')->name('logout');
+});
