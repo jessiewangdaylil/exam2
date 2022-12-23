@@ -9,7 +9,9 @@ use App\Http\Controllers\Controller;
 
 class PostController extends Controller
 {
-  private function makeJson($status, $data, $msg)
+
+    //用於生成 JSON 字串
+    private function makeJson($status, $data, $msg)
     {
         //轉 JSON 時確保中文不會變成 Unicode
         return response()->json(['status' => $status, 'data' => $data, 'message' => $msg])->setEncodingOptions(JSON_UNESCAPED_UNICODE);
@@ -22,7 +24,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::get();
+        $posts = Post::get(); //取得 posts 表格的所有資料
 
         if(isset($posts) && count($posts) > 0){
             $data = ['posts' => $posts];
@@ -61,7 +63,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post = Post::find($id);
+        $post = Post::find($id); //用主鍵來尋找資料
 
         if(isset($post)){
             $data = ['post' => $post];
@@ -80,30 +82,29 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-         try {
-             $post = Post::findOrFail($id);
-            // $post->title = $request->title;
+        //dd($request->all());
+        try {
+            $post = Post::findOrFail($id);
+            // $post->title = $request->input('title');
             // $post->content = $request->content;
+            // $post->pic = $request->pic;
+            // $post->save();
 
-
-             $input = $request->only(['title','pic','content','status','enabled','sort']);
-             if($input['enabled'] == 1){
+            $input = $request->only(['title','pic','status','content','sort','enabled']);
+            if($input['enabled'] == '1'){
                 $input['enabled'] = true;
-             }else {
-               $input['enabled'] = false;
-             }
-              // $post->save($input);
-
+            }else{
+                $input['enabled'] = false;
+            }
             $post->update($input);
         } catch (Throwable $e) {
             //更新失敗
-            // $data = ['post' => $post];
-            return $e;
-            // return $this->makeJson(0,null,'更新文章失敗');
+            return $this->makeJson(0,null,'更新文章失敗');
         }
+
         $data = ['post_id' => $post->id];
         return $this->makeJson(1,$data,'更新文章成功');
-     }
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -121,10 +122,10 @@ class PostController extends Controller
             return $this->makeJson(0,null,'刪除文章失敗');
         }
         return $this->makeJson(1,null,'刪除文章成功');
-
     }
 
-    public function doAny(Request $request){
+    public function doAny(Request $request)
+    {
         // 取得完整檔名
         $filenameWithExt = $request->file('pic')->getClientOriginalName();
         // 只取檔名
@@ -132,7 +133,7 @@ class PostController extends Controller
         // 只取副檔名
         $extension = $request->file('pic')->getClientOriginalExtension();
         // 生成新檔名
-        $fileNameToStore = $filename.'_'.time().'.'.$extension;
+        $fileNameToStore = $filename . '_' . time() . '.' . $extension;
         // 儲存圖片
         $path = $request->file('pic')->storeAs('public/storage/pic',$fileNameToStore);
         return $path;

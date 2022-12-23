@@ -12,6 +12,13 @@ use App\Http\Controllers\Controller;
 //請完成下方所有方法的實作，並撰寫對應的路由，用 Postman 來進行測試
 class ArticleController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
+
     /**
      * 回傳該表格的所有資料，以 sort 欄位從小到大排序
      *

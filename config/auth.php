@@ -11,13 +11,12 @@ return [
     | reset options for your application. You may change these defaults
     | as required, but they're a perfect start for most applications.
     |
-    */
+     */
 
     'defaults' => [
         'guard' => 'web',
         'passwords' => 'users',
     ],
-
 
     /*
     |--------------------------------------------------------------------------
@@ -34,17 +33,17 @@ return [
     |
     | Supported: "session"
     |
-    */
+     */
 
     'guards' => [
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
         ],
-    'api' => [
-        'driver' => 'jwt',
-        'provider' => 'users',
-    ],
+        'api' => [
+            'driver' => 'jwt',
+            'provider' => 'users',
+        ],
     ],
 
     /*
@@ -62,7 +61,7 @@ return [
     |
     | Supported: "database", "eloquent"
     |
-    */
+     */
 
     'providers' => [
         'users' => [
@@ -89,7 +88,7 @@ return [
     | considered valid. This security feature keeps tokens short-lived so
     | they have less time to be guessed. You may change this as needed.
     |
-    */
+     */
 
     'passwords' => [
         'users' => [
@@ -109,7 +108,7 @@ return [
     | times out and the user is prompted to re-enter their password via the
     | confirmation screen. By default, the timeout lasts for three hours.
     |
-    */
+     */
 
     'password_timeout' => 10800,
 

@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
-use App\Http\Requests\PostRequest;
-use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
@@ -32,9 +31,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        $modes = ['recommend'=>'編輯精選','season'=>'當季商品','cp'=>'超值商品'];
+        $modes = ['recommend' => '編輯精選', 'season' => '當季商品', 'cp' => '超值商品'];
         $mode = 'cp';
-        return view('posts.create',compact('modes','mode'));
+        return view('posts.create', compact('modes', 'mode'));
     }
 
     /**
@@ -46,12 +45,12 @@ class PostController extends Controller
     public function store(PostRequest $request)
     {
         $data = $request->all();
-       // dd($request->file('pic'));
+        // dd($request->file('pic'));
         //return $request->all();
         //驗證示範
         // $validator = Validator::make($request->all(),[
         //     'title' => 'required | max:10',
-        //     'desc' => 'required' 
+        //     'desc' => 'required'
         // ]);
 
         // if($validator->fails()){
@@ -59,19 +58,18 @@ class PostController extends Controller
         // }
 
         if ($request->hasFile('pic')) {
-            $file = $request->file('pic');  //獲取UploadFile例項
-            if ( $file->isValid()) { //判斷檔案是否有效
+            $file = $request->file('pic'); //獲取UploadFile例項
+            if ($file->isValid()) { //判斷檔案是否有效
                 //$filename = $file->getClientOriginalName(); //檔案原名稱
                 $extension = $file->getClientOriginalExtension(); //副檔名
-                $fileName = time() . "." . $extension;    //重新命名
-                $data['pic'] = $filename;
-                $path = $file->storeAs('public/pic',$fileName); //儲存至指定目錄
+                $fileName = time() . "." . $extension; //重新命名
+                $data['pic'] = $fileName;
+                $path = $file->storeAs('public/pic', $fileName); //儲存至指定目錄
             }
         }
 
         return '所有文章';
         //return $data;
-
 
         //return $request->all();
         //返回到index頁面
@@ -110,7 +108,7 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+
         return redirect('posts');
     }
 
