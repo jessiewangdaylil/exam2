@@ -21,11 +21,11 @@ class CgySeeder extends Seeder
         $faker = Factory::create('zh_TW');
 
         //建立資料
-        // for ($i=1; $i <=100 ; $i++) { 
+        // for ($i=1; $i <=100 ; $i++) {
         //     //Cgy::create(['title' => '分類' . rand(1,1000) , 'enabled' => true, 'enabled_at' => Carbon::now()->addDays(rand(0,10))]);
         //     //Cgy::create(['title' => $faker->realText(15) , 'enabled' => $faker->randomElement([true,false]), 'enabled_at' => Carbon::createFromFormat('Y-m-d',$faker->date)]);
-        
+
         // }
-        Cgy::factory()->times(100)->create();
+       return  Cgy::factory()->times(100)->create();
     }
 }

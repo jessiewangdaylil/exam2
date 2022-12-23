@@ -21,7 +21,8 @@ return new class extends Migration
             $table->integer('sort')->default(0);
             $table->string('pic',255)->nullable();
             $table->boolean('enabled')->default(true);
-            $table->bigInteger('cgy_id');
+            $table->foreignId('cgy_id')->constrained();
+            //$table->bigInteger('cgy_id');
             $table->timestamps();
         });
     }
@@ -33,6 +34,9 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::table('articles', function (Blueprint $table) {
+            $table->dropForeign('cgy_id');
+        });
         Schema::dropIfExists('articles');
     }
 };
